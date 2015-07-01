@@ -1,4 +1,4 @@
-package Csv;
+package CsvTerminkalender;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,24 +7,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import AdressBook.ContactDetails;
+import calendar.Appointment;
 
-public class CSVContactsReader {
 
-	public static List<ContactDetails> readEntityList(String dateiname, String splitter) {
+public class CSVTerminReader {
+	
+	public static List<Appointment> readAppointment(String dateiname, String splitter) {
 		Path source = Paths.get(dateiname);
-		return readEntityList(dateiname, splitter);
+		return readAppointment(dateiname, splitter);
 	}
-	public static List<ContactDetails> readEntityList(Path source, String splitter) {
-		List<ContactDetails> target = new ArrayList<>();
+	
+	public static List<Appointment> readAppointment(Path source, String splitter) {
+		List<Appointment> target = new ArrayList<>();
 		try {
 		List<String> lines = Files.readAllLines(source);
 		for (String line : lines){
 			try{
-				target.add(new ContactDetails(line.split(splitter)));
+				target.add(new Appointment(line.split(splitter)));
 		
 		} catch (Exception e) {e.printStackTrace(System.err);
-			target.add(new ContactDetails());
+			target.add(new Appointment());
 			}
 		}
 	} catch (IOException e)	{e.printStackTrace(System.err);
@@ -34,3 +36,5 @@ public class CSVContactsReader {
 	return target;
 	}
 }
+
+
